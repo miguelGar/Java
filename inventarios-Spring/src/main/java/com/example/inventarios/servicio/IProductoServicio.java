@@ -12,7 +12,7 @@ import java.util.List;
  * @author miguel
  */
 public interface IProductoServicio {
-    
+    // Métodos que implementa el Servicio
     public List<Producto> listarProductos();
     public Producto buscarProductoPorId(Integer idProducto);
     public Producto guardarProducto(Producto producto);

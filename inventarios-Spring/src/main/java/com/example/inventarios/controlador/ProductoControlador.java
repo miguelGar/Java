@@ -29,26 +29,34 @@ import org.springframework.web.bind.annotation.*;
 public class ProductoControlador {
     
     private static final Logger logger = LoggerFactory.getLogger(ProductoControlador.class);
-    
+
+    /*
+    API CON SERVICIOS DISPONIBLES QUE SE PODRAN CONSUMIR
+    GET, POST, PUT, DELETE
+     */
+
     @Autowired
     private ProductoServicio productoServicio;
     
     // http://localhost:8085/inventario-app/productos
+    //Obtiene todos los productos
     @GetMapping("/productos")
     public List<Producto> obtenerProductos(){
         List<Producto> productos = this.productoServicio.listarProductos();
         logger.info("Productos Obtenidos");
         productos.forEach(producto -> logger.info(producto.toString()));
+
         return productos;
         
     }
-
+    //Agregar producto
     @PostMapping("/productos")
     public Producto agregarProducto(@RequestBody Producto producto){
         logger.info("Producto a agregar: " + producto);
+
         return this.productoServicio.guardarProducto(producto);
     }
-
+    //Obtiene producto por Id
     @GetMapping("/productos/{id}")
     public ResponseEntity<Producto> obtenerProductoPorId(@PathVariable int id){
         Producto producto = this.productoServicio.buscarProductoPorId(id);
@@ -57,7 +65,7 @@ public class ProductoControlador {
         else
             throw new AdminException("No se encontro el producto");
     }
-
+    //Actualiza producto por Id
     @PutMapping("/productos/{id}")
     public ResponseEntity<Producto> actualizarProducto(@PathVariable int id,
                                                        @RequestBody Producto productoRequest){
@@ -68,9 +76,10 @@ public class ProductoControlador {
         producto.setPrecio(productoRequest.getPrecio());
         producto.setExistencia(productoRequest.getExistencia());
         this.productoServicio.guardarProducto(producto);
+
         return ResponseEntity.ok(producto);
     }
-
+    //Elimina producto por Id
     @DeleteMapping("/productos/{id}")
     public ResponseEntity<Map<String, Boolean>> eliminarProducto(@PathVariable int id){
         Producto producto = productoServicio.buscarProductoPorId(id);
@@ -79,6 +88,7 @@ public class ProductoControlador {
         this.productoServicio.eliminarProductoPorId(producto.getIdeProducto());
         Map<String, Boolean> respuesta = new HashMap<>();
         respuesta.put("eliminado", Boolean.TRUE);
+
         return  ResponseEntity.ok(respuesta);
 
     }
