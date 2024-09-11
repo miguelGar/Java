@@ -1,4 +1,4 @@
-# Project Name
+# Inventory
 
 > Java Spring application RESTful API for an inventory platform.
 
