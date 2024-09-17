@@ -23,18 +23,18 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-@Path("/productos")
+@Path("")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ProductoControlador {
 
-    protected Logger logger;
+    protected Logger logger = Logger.getLogger(ProductoControlador.class.getName());  // Initialize the logger
 
     @jakarta.inject.Inject
     ProductoServicio productoServicio;
     
     @GET
-    @Path("")
+    @Path("/productos")
     public List<Producto> obtenerProductos() {
         List<Producto> productos = this.productoServicio.listarProductos();
         logger.info("Productos Obtenidos");
@@ -56,7 +56,7 @@ public class ProductoControlador {
 
     @GET
     @Path("/{id}")
-    public Response obtenerProductoPorId(@PathParam("id") Long idProducto) {
+    public Response obtenerProductoPorId(@PathParam("id") int idProducto) {
         Producto producto = productoServicio.buscarProductoPorId(idProducto);
         if (producto != null) {
             return Response.ok(producto).build();
@@ -67,7 +67,7 @@ public class ProductoControlador {
 
     @PUT
     @Path("/{id}")
-    public Response actualizarProducto(@PathParam("id") Long idProducto, Producto productoRequest){
+    public Response actualizarProducto(@PathParam("id") int idProducto, Producto productoRequest){
         
         Producto producto = productoServicio.buscarProductoPorId(idProducto);
         if (producto == null) {
@@ -86,7 +86,7 @@ public class ProductoControlador {
 
     @DELETE
     @Path("/{id}")
-    public Response eliminarProducto(@PathParam("id") Long idProducto) {
+    public Response eliminarProducto(@PathParam("id") int idProducto) {
 
         Producto producto = productoServicio.buscarProductoPorId(idProducto);
         if(producto == null)
