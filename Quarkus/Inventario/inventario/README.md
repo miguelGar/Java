@@ -73,7 +73,7 @@ This project was built with the following technologies:
   ./mvnw compile quarkus:dev
   ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080>.
 
 6. The application can be packaged using
 
