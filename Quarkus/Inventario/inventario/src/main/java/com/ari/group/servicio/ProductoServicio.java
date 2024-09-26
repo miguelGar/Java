@@ -48,7 +48,7 @@ public class ProductoServicio {
 
     @Transactional
     public void eliminarProductoPorId(Long idProducto) {
-        Producto producto = productoRepositorio.findById((long) idProducto);
+        Producto producto = productoRepositorio.findById(idProducto);
         if (producto != null) {
             productoRepositorio.delete(producto);
         }

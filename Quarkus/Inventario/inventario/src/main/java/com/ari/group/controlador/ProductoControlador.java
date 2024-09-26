@@ -67,7 +67,8 @@ public class ProductoControlador {
 
     @PUT
     @Path("/{id}")
-    public Response actualizarProducto(@PathParam("id") int idProducto, Producto productoRequest){
+    public Response actualizarProducto(@PathParam("id") int idProducto,
+                                       Producto productoRequest){
         
         Producto producto = productoServicio.buscarProductoPorId(idProducto);
         if (producto == null) {
