@@ -17,8 +17,9 @@ public class Proveedor {
 
     @Column(nullable = false)
     private String nombre;
-    private String Telefono;
+    private String telefono;
     private String email;
+    
     
     public Long getId() {
         return id;
@@ -33,10 +34,10 @@ public class Proveedor {
         this.nombre = nombre;
     }
     public String getTelefono() {
-        return Telefono;
+        return telefono;
     }
     public void setTelefono(String telefono) {
-        Telefono = telefono;
+        telefono = telefono;
     }
     public String getEmail() {
         return email;

@@ -18,6 +18,9 @@ public class Producto {
     private BigDecimal precioCompra;
     private BigDecimal precioVenta;
     private Integer cantidad;
+    private String color;
+    private String marca;
+    private String descripcion;
     
     public Long getId() {
         return id;
@@ -85,8 +88,6 @@ public class Producto {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    private String color;
-    private String marca;
-    private String descripcion;
+   
 
 }

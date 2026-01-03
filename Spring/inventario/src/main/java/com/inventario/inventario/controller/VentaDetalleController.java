@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.inventario.inventario.dto.DetalleVentaDTO;
 import com.inventario.inventario.model.VentaDetalle;
 import com.inventario.inventario.repository.VentaDetalleRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +21,8 @@ public class VentaDetalleController {
     private VentaDetalleRepository ventaDetalleRepo;
 
     @GetMapping("/ventas-detalle/{id}")
-    public ResponseEntity<List<VentaDetalle>> getDetallesVenta(@PathVariable Long id) {
-        List<VentaDetalle> detalles = ventaDetalleRepo.findByVentaIdOrderByidAsc(id);
+    public ResponseEntity<List<DetalleVentaDTO>> getDetallesVenta(@PathVariable Long id) {
+        List<DetalleVentaDTO> detalles = ventaDetalleRepo.findByVentaIdOrderByidAsc(id);
         return ResponseEntity.ok(detalles);
     }
     

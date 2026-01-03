@@ -3,6 +3,9 @@ package com.inventario.inventario.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +26,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/api")
 public class ProveedorController {
 
+    private static final Logger logger = LoggerFactory.getLogger(ProveedorController.class);
+
+
     @Autowired
     private ProveedorRepository proveedorRepository;
 
     @PostMapping("/proveedores")
     public ResponseEntity<?>  crearProveedor(@RequestBody Proveedor proveedor) {
         //TODO: process POST request
+       
         if(proveedor.getNombre() == null || proveedor.getNombre().isBlank()){
             return ResponseEntity.badRequest().body(Map.of("error", "El nombre del proveedor es obligatorio"));
         }
@@ -38,7 +45,9 @@ public class ProveedorController {
 
     @GetMapping("/proveedores")
     public List<Proveedor> listaProveedores(){
-        return proveedorRepository.findAll();
+        List<Proveedor> proveedor = this.listaProveedores();
+        proveedor.forEach(producto -> logger.info(producto.toString()));
+        return proveedor;
     }
 
     @DeleteMapping("/proveedores/{id}")
